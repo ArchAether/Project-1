@@ -2,7 +2,7 @@ window.onload = function(){
 	console.log("app loading");
 	loadLandingView();
 }
-
+//---Load Landing View---
 function loadLandingView(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
@@ -11,7 +11,20 @@ function loadLandingView(){
 			$('#view').html(xhr.responseText);
 		}
 	}
+	xhr.open("GET", "landing.view");
+	xhr.send();
 }
+//===Load Login Page===
+function loadLoginView(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(readyState == 4 && xhr.status == 200){
+			console.log("MOVING TO LOGIN PAGE");
+			$('#view').html(xhr.responseText);
+		}
+	}
+}
+
 //String check
 function validString (str){
 	if (str == null || str == ''){
@@ -29,7 +42,6 @@ function loginUser(){
 				username: username,
 				password: password
 		};
-	
 	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
@@ -65,10 +77,10 @@ function submitReimb(){
 	
 	if(validString(reimbAmout) && validString(reimbSubmitted) && validString(reimbAuthor) && validString(reimbType)){
 		var reimbursement = {
-			reimbAmount = amount,
-			reimbSubmitted = submitted,
-			reimbAuthor = author,
-			reimbType = type
+			reimbAmount : amount,
+			reimbSubmitted : submitted,
+			reimbAuthor : author,
+			reimbType : type
 		};
 	
 	var xhr = new HttpRequest();

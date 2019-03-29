@@ -21,8 +21,9 @@ public class LoadViewServlet extends HttpServlet{
 		
 		//parse the URI for the resource:
 		String uri = req.getRequestURI();
-		String name = uri.substring(21,(uri.length()-5));	//substring resource
+		String name = uri.substring(16,(uri.length()-5));	//substring resource
 		log.info("CHECKING THE URI "+ name);
+		log.info("What's the URI?"+ uri);
 		req.getRequestDispatcher("partials/"+name+".html").forward(req,resp);	
 		//forwards the req/resp to another servlet
 	}
