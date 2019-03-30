@@ -10,10 +10,10 @@ function loadLandingView(){
 			console.log('LOADING RESPONSE RECIEVED');
 			$('#view').html(xhr.responseText);
 			console.log(xhr.responseText);
-			$('#title').on('click',loadLandingView);
+			//--Add event listeners--
+			$('#title').on('click',loadLandingView);	
 			$('#home').on('click', loadLandingView);
 			$('#login').on('click', loadLoginView);
-			
 			
 		}
 	}
@@ -28,6 +28,7 @@ function loadLoginView(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			console.log("MOVING TO LOGIN PAGE");
 			$('#view').html(xhr.responseText);
+			$('#submit_btn').on('click', loginUser);
 		}
 	}
 	xhr.open("GET", "Login.view");
@@ -44,6 +45,7 @@ function validString (str){
 }
 //Login
 function loginUser(){
+	console.log("ATTEMTPING TO SIGN IN");
 	var username = $('#username').val();
 	var password = $('#password').val();
 	
@@ -55,7 +57,7 @@ function loginUser(){
 	
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
-		if(readyState == 4 && xhr.status == 200){
+		if(xhr.readyState == 4 && xhr.status == 200){
 			console.log('LOGIN RESPONSE RECIEVED');
 			var user = JSON.parse(xhr.responseText);	//get user
 			console.log(xhr.getAllResponseHeaders());
@@ -69,13 +71,13 @@ function loginUser(){
 			}
 		}
 	}
-	xhr.open("POST", "login");
+	xhr.open("POST", "Login");
 	xhr.setRequestHeader("Content-type", "application/json");
 	xhr.send(JSON.stringify(user));
 	}
 	else{
 		//User has not put in anything for username and password
-		$('#view').html("Please enter a username and password!");
+		$('#sign_error').html("<p class = 'text-warning'>Please enter a username and password!</p>");
 	}
 }
 //submit reimbursement
@@ -95,7 +97,7 @@ function submitReimb(){
 	
 	var xhr = new HttpRequest();
 	xhr.onreadystatechange = function(){
-		if(readyState = 4 && xhr.status == 200){
+		if(xhr.readyState = 4 && xhr.status == 200){
 			console.log('SUBMITTED');
 			
 		}

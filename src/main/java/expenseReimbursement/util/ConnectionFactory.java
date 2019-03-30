@@ -28,8 +28,8 @@ public class ConnectionFactory {
 		String path = "src/main/resources/database.properties";
 		
 		try {
-			prop.load(new FileReader(path));
-			
+			//prop.load(new FileReader(path));
+			log.info("trying to create url");
 			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 			String server = "jdbc:sqlserver://localhost:1433";
 			String database = "Expense_Reimbursement_Db";
@@ -38,7 +38,7 @@ public class ConnectionFactory {
 			String security = "integratedSecurity = true";
 			String url = server+ ";database="+database+";username="+username+";password="+password+";"+security+";";
 			
-			Class.forName(prop.getProperty("driver"));
+			//Class.forName(prop.getProperty("driver"));
 //			conn = DriverManager.getConnection(
 //						prop.getProperty("url"),
 //						prop.getProperty("username"),
@@ -46,9 +46,9 @@ public class ConnectionFactory {
 //						);
 			conn = DriverManager.getConnection(url);
 			log.info("Connection Success");
-		}catch(IOException e) {
+		}/*catch(IOException e) {
 			e.printStackTrace();
-		}catch(SQLException e) {
+		}*/catch(SQLException e) {
 			e.printStackTrace();
 		}catch(Exception e) {
 			e.printStackTrace();

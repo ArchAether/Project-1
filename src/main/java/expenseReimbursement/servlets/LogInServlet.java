@@ -37,8 +37,22 @@ public class LogInServlet extends HttpServlet {
 		//doGet(request, response);
 		log.info("EXECUTING LOG IN SERVLET");
 		ObjectMapper mapper = new ObjectMapper();
-		User user = mapper.readValue(request.getInputStream(), User.class);
-		String username;
+		log.info("made object mapper");
+		User user = mapper.readValue(request.getInputStream(), User.class); //reading user
+		log.info("Trying to log User: " + user.toString());
+		User logged = service.login(user.getUsername(), user.getPassword());
+		String isUser = "";
+		
+		if (logged == null) {
+			log.info("login Failed");
+			isUser = mapper.writeValueAsString(null);
+			
+		}
+		else {
+			log.info("Login Success!");
+			isUser = mapper.writeValueAsString(isUser);
+			
+		}
 	}
 
 }
