@@ -6,9 +6,15 @@ window.onload = function(){
 function loadLandingView(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
-		if(readyState = 4 && xhr.status == 200){
+		if(xhr.readyState == 4 && xhr.status == 200){
 			console.log('LOADING RESPONSE RECIEVED');
 			$('#view').html(xhr.responseText);
+			console.log(xhr.responseText);
+			$('#title').on('click',loadLandingView);
+			$('#home').on('click', loadLandingView);
+			$('#login').on('click', loadLoginView);
+			
+			
 		}
 	}
 	xhr.open("GET", "landing.view");
@@ -16,13 +22,17 @@ function loadLandingView(){
 }
 //===Load Login Page===
 function loadLoginView(){
+	console.log("Login Clicked");
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
-		if(readyState == 4 && xhr.status == 200){
+		if(xhr.readyState == 4 && xhr.status == 200){
 			console.log("MOVING TO LOGIN PAGE");
 			$('#view').html(xhr.responseText);
 		}
 	}
+	xhr.open("GET", "Login.view");
+	xhr.send();
+	console.log("SENT LOGIN REQ");
 }
 
 //String check
