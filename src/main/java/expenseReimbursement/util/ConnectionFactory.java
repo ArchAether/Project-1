@@ -9,6 +9,8 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
+import com.sun.corba.se.spi.activation.Server;
+
 import expenseReimbursement.service.UserService;
 
 public class ConnectionFactory {
@@ -25,26 +27,31 @@ public class ConnectionFactory {
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String path = "src/main/resources/database.properties";
-		
+		String path = "C:\\GitHub\\Stephen ProjectOne\\src\\main\\resources\\database.properties";
 		try {
-			//prop.load(new FileReader(path));
-			log.info("trying to create url");
-			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
-			String server = "jdbc:sqlserver://localhost:1433";
-			String database = "Expense_Reimbursement_Db";
-			String username = "MicrosoftAccount\\archaether@gmail.com";
-			String password = "";
-			String security = "integratedSecurity = true";
-			String url = server+ ";database="+database+";username="+username+";password="+password+";"+security+";";
+//			attempt with sql Server. didn't work...
+//			log.info("trying to create url");
+//			String driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+//			String server = "jdbc:sqlserver://localhost:1433";
+//			String database = "Expense_Reimbursement_Db";
+//			String username = "MicrosoftAccount\\archaether@gmail.com";
+//			String password = "";
+//			String security = "integratedSecurity = true";
+//			String url = driver +";"+ server+ ";database="+database+";username="+username+
+//					";password="+password+";"+security+";";
+//			log.info(url);
+//			Class.forName(driver);
+//			conn = DriverManager.getConnection(url);
 			
-			//Class.forName(prop.getProperty("driver"));
-//			conn = DriverManager.getConnection(
-//						prop.getProperty("url"),
-//						prop.getProperty("username"),
-//						prop.getProperty("password")
-//						);
-			conn = DriverManager.getConnection(url);
+			prop.load(new FileReader(path));
+			Class.forName(prop.getProperty("driver"));
+			conn = DriverManager.getConnection(
+						prop.getProperty("url"),
+						prop.getProperty("username"),
+						prop.getProperty("password")
+						);
+			
+			
 			log.info("Connection Success");
 		}/*catch(IOException e) {
 			e.printStackTrace();
