@@ -84,7 +84,7 @@ function loginUser(){
 	}
 	else{
 		//User has not put in anything for username and password
-		$('#sign_error').html("<p class = 'text-warning'>Please enter a username and password!</p>");
+		$('#error_message').html("<p class = 'text-warning'>Please enter a username and password!</p>");
 	}
 }
 //submit reimbursement
