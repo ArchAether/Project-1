@@ -28,6 +28,12 @@ function loadLoginView(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			console.log("MOVING TO LOGIN PAGE");
 			$('#view').html(xhr.responseText);
+			$('#password').on('keydown',function(e){
+				if(e.which == 13){
+					loginUser();
+				}
+			});
+			
 			$('#submit_btn').on('click', loginUser);
 		}
 	}
@@ -63,10 +69,11 @@ function loginUser(){
 			console.log(xhr.getAllResponseHeaders());
 			if(user == null){							//login fail
 				console.log('LOGIN FAIL');
-				$('#view').html("Could not log you in, please check your credentials");
+				$('#error_message').html("Could not log you in, please check your credentials");
 			}
 			else{
 				console.log('Success! bringing to homepage');
+				loadLandingView();
 				//load view;
 			}
 		}

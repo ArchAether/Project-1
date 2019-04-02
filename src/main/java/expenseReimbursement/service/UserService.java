@@ -12,17 +12,20 @@ public class UserService {
 	
 	public User login(String username, String password) {
 		User u = dao.getByUsername(username);
+		
 		if(u == null) {
 			log.info("No such user found");
 			return null;
 		}
 		else {
-			if(u.getPassword() == password) {
+			String userPassword = u.getPassword();	//cannot put this above; NullPointerException, since user doesn't exist
+			if(userPassword.equals(password)) {		//Never use == for String comparisons in Java
 				log.info("User successfully logged in!");
 				return u;
 			}
 			else {
-				log.info("Incorrect credentials.");
+				//log.info("Incorrect credentials. Your Password: " + userPassword + "\n Correct Password: " + password);
+				//log.info("\nAre they the same? " + (userPassword.equals(password)));
 				return null;
 			}
 		}

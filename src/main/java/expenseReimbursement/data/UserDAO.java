@@ -48,18 +48,18 @@ public class UserDAO {
 	public User getByUsername(String username) {
 		User u = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String sql = "select* from Users where lower(ERS_username) = ?"; //set to ?. Can make multiple ? for indexes
+			String sql = "select * from Users where lower(ERS_username) = ?  ";//set to ?. Can make multiple ? for indexes
 			PreparedStatement ps = conn.prepareStatement(sql);					//"compiles" code
 			ps.setString(1,username.toLowerCase());							//(Index, Value)
 			ResultSet rs = ps.executeQuery();					//Get user back
 			if(rs.next()) {
 				u = new User(
 						rs.getInt(1),
-						rs.getString("username"),
-						rs.getString("password"),
-						rs.getString("firstName"),
-						rs.getString("lastName"),
-						rs.getString("email"));
+						rs.getString("ERS_username"),		//These need to be from the DB
+						rs.getString("ERS_password"),
+						rs.getString("user_firstName"),
+						rs.getString("user_lastName"),
+						rs.getString("user_email"));
 			}
 			
 		}catch(SQLException e) {
