@@ -14,6 +14,7 @@ function loadLandingView(){
 			$('#title').on('click',loadLandingView);	
 			$('#home').on('click', loadLandingView);
 			$('#login').on('click', loadLoginView);
+			$('#submitReimb').on('click', loadReimbSubmitView);
 			
 		}
 	}
@@ -40,6 +41,20 @@ function loadLoginView(){
 	xhr.open("GET", "Login.view");
 	xhr.send();
 	console.log("SENT LOGIN REQ");
+}
+//load reimb submit
+function loadReimbSubmitView(){
+	var xhr = new HttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			console.log('Moving to submit reimb page');
+			$('view').html(xhr.responseText);
+			
+		}
+	}
+	xhr.open("GET", "SubmitReimb.view");
+	xhr.send();
+	console.log("REQ SUBMIT REIMB VIEW");
 }
 
 //String check
